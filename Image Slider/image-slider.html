@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Slider</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #3d3d3d;
+        }
+        .slider-container {
+            text-align: center;
+            position: relative;
+        }
+        .slider img {
+            width: 500px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: opacity 0.5s ease-in-out;
+        }
+        .buttons {
+            margin-top: 10px;
+            
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 5px;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="slider-container">
+      <h2 style="color: white;">Image Slider </h2>
+      <div class="slider">
+        <img id="image-slider" src alt="Image Slider" />
+      </div>
+      <div class="buttons">
+        <button onclick="prevImage()">Prev Image</button>
+        <button onclick="nextImage()">Next Image</button>
+      </div>
+    </div>
+    <script>
+        const images = [
+            "https://t4.ftcdn.net/jpg/04/17/36/11/240_F_417361125_RnrhT3Np0zB0UpeD7QlwuOoyghEGGjBX.jpg",
+            'https://img.lovepik.com/bg/20240117/tiger-wallpapers-hd-wallpapers-4k_2775019_wh1200.jpg',
+            'https://t4.ftcdn.net/jpg/06/29/35/69/360_F_629356922_KB0F6hwZpSItiNyolBXflK2rb46iaeBx.jpg'
+        ];
+        let currentIndex = 0;
+        const sliderImage = document.getElementById('image-slider');
+        sliderImage.src = images[currentIndex];
+
+        function updateImage() {
+            sliderImage.style.opacity = 0;
+            setTimeout(() => {
+                sliderImage.src = images[currentIndex];
+                sliderImage.style.opacity = 1;
+            }, 300);
+        }
+
+        function prevImage() {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            updateImage();
+        }
+
+        function nextImage() {
+            currentIndex = (currentIndex + 1) % images.length;
+            updateImage();
+        }
+
+        setInterval(nextImage, 3000);
+    </script>
+  </body>
+</html>
